@@ -1,0 +1,43 @@
+
+sources:
+
+  - name: snowflake # name of the source (this can be named whatever you want, but should be descriptive. this source (superheroes) is used for our week 1 tutorial so thats why i named it this way)
+    schema: public # this is the schema our raw data lives in
+    database: raw # this is the name of the database that our source data lives in
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness: # this is where we define freshness thresholds
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables: # this is where we define table metadata (name, description, load timestamps)
+      - name: users 
+        loaded_at_field: created_at
+        description: >
+          Contains identifiers for each user 
+      - name: events 
+        loaded_at_field: created_at
+        description: >
+          Contains logs for purchases 
+      - name: products 
+        description: >
+          subtable of product name, price, number 
+      - name: orders 
+        loaded_at_field: created_at
+        description: >
+          details of each order, walkback to user on user_id
+      - name: promos 
+        description: >
+          discounts with status, e.g. active/inactive 
+      - name: order_items 
+        description: >
+          subtable of order with product ids
+      - name: addresses 
+        description: >
+          subtable of users with address info
+
+
