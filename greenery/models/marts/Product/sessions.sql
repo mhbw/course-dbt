@@ -23,7 +23,6 @@ select a.session_id
     , c.session_end_time_utc
     , d.product_name
     , d.product_type
-    , {{ aggregate_distinct_counts('stg_events', 'event_type', 'event_guid') }}
     , datediff('minute',c.session_start_time_utc,c.session_end_time_utc) as session_length_minutes
 from events a
 left join order_items b on a.order_id = b.order_id

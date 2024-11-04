@@ -1,0 +1,9 @@
+exposures:
+  - name: product_funnel_analysis
+    type: dashboard
+    depends_on:
+      - ref('funnel_analysis')
+    description: "Tracks user progression through the product funnel for reporting in downstream BI tools."
+    owner:
+      name: nylon stocking
+      email: fake@nameandemail.com
